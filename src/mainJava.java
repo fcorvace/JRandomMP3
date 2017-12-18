@@ -39,7 +39,7 @@ public class mainJava {
 		File[] l = retrieveMp3(origin);
 		Map<File, Integer> map = new HashMap<File, Integer>();
 		Pattern pattern = Pattern.compile(".*\\d+-.*");
-		int digit = 4;// (int) (Math.floor(Math.log10(l.length)) + 1)+1;
+		int digit = 5;// (int) (Math.floor(Math.log10(l.length)) + 1)+1;
 		String format = "%0" + digit + "d";
 		for (File x : l) {
 			int i = r.nextInt(l.length);
@@ -69,9 +69,10 @@ public class mainJava {
 		Matcher matcher = pattern.matcher(x.toString());
 		if (matcher.matches()) {
 			String y = x.toString();
-			String filename = y.split("/")[1];
+			String filename = y.split("\\.\\\\")[1];
 			char[] arr = filename.toCharArray();
-			if (arr[4] == '-') {
+      //must be '-' without a space before, with 4 or 5 digits
+			if (((arr[4] == '-') && (arr[3] != ' ')) || ((arr[5] == '-') && (arr[4] != ' '))){
 				// Already transformed
 				int i = 0;
 				while (arr[i] != '-') {
